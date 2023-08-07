@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # Allowing the use of the item database inside of the views file.
 # allowing us to render the database items
 from .models import Item
+from .forms import ItemForm
 
 # Create your views here.
 
@@ -34,14 +35,55 @@ def add_item(request):
     Also not forgetting to add the page into the urls.py file
     """
     if request.method == 'POST':
-        name = request.POST.get('item_name')  # Getting the items name
-        done = 'item_done' in request.POST  # Getting the items boolean value of the checkbox
-        # Passing the items variables to the create object method. To create it on the database
-        Item.objects.create(name=name, done=done)
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('get_todo_list')
+
+        # name = request.POST.get('item_name')  # Getting the items name
+        # # Getting the items boolean value of the checkbox
+        # done = 'item_done' in request.POST
+        # # Passing the items variables to the create object method. To create it on the database
+        # Item.objects.create(name=name, done=done)
 
         print(request.POST)
         print('Done value: ', done)
 
         #  Using the redirect method it redirects the user to the 'home'/previous page. - Remembering redirect needs importing
-        return redirect('get_todo_list')
-    return render(request, 'todo/add_item.html',)
+        # return redirect('get_todo_list')
+
+    form = ItemForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'todo/add_item.html', context)
+
+
+def edit_item(request, item_id):
+    """
+    Allows the user to edit the item on the page that it directs the user to
+    """
+    item = get_object_or_404(Item, id=item_id)
+    form = ItemForm(instance=item)
+    context = {
+        'form': form
+    }
+    if request.method == 'POST':
+        form = ItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('get_todo_list')
+    return render(request, 'todo/edit_item.html', context)
+
+
+def toggle_item(request, item_id):
+    item = get_object_or_404(Item, id=item_id)
+    item.done = not item.done
+    item.save()
+    return redirect('get_todo_list')
+
+
+def delete_item(request, item_id):
+    item = get_object_or_404(Item, id=item_id)
+    item.delete()
+    return redirect('get_todo_list')
