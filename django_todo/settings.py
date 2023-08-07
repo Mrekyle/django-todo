@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # ensuring django knows that the application is part of the website
+    # by importing that into the installed apps.
+    'todo'
 ]
 
 MIDDLEWARE = [
