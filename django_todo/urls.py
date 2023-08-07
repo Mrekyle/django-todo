@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from todo.views import get_todo_list
+from todo.views import get_todo_list, add_item
 
     # """
     # The url patterns is the same as the app.route in flask. Using the path 
@@ -26,5 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # leaving an empty string means we will hit the default home page of the application
     # without specifying what page to go to
-    path('', get_todo_list, name='To Do List Application'),
+    path('', get_todo_list, name='get_todo_list'),
+    path('add', add_item, name='add'),
 ]

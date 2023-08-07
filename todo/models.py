@@ -18,3 +18,10 @@ class Item(models.Model):
     """
     name = models.CharField(max_length=50 , null=False, blank=False)  # CharField means it will just have characters or text
     done = models.BooleanField(null=False, blank=False, default=False)  # True of false
+
+    """
+    Ensures that the name of the item in the form is the name of the item that the user put into the form. 
+    As it returns itself as the name item
+    """
+    def __str__(self):
+        return self.name

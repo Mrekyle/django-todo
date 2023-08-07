@@ -7,3 +7,7 @@ from django.contrib import admin
 # we need to import that into the admin file to allow it to be seen on the admin panel
 
 from .models import Item
+
+# Ensuring that the admin user has access to the model
+
+admin.site.register(Item)
