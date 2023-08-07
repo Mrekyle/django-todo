@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from todo.views import say_hello
 
+    # """
+    # The url patterns is the same as the app.route in flask. Using the path 
+    # method we specify the url, the name of the function/page and then the 
+    # name that we call it. 
+    # """
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('hello/', say_hello, name='hello'),
 ]
