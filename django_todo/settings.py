@@ -27,13 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
-    'SECRET_KEY', 'django-insecure-14#(#-iss(#wx$^6)s1p+=#=1_49^v9oq%xql6z=xzi7pf-d+k')
+    'SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = development
 
 if development:
-    ALLOWED_HOSTS - ['localhost']
+    ALLOWED_HOSTS = ['localhost']
 else:
     ALLOWED_HOSTS = [os.environ.get(
         'HEROKU_HOSTNAME'), 'django-todo-list-ci-c46abdca8478.herokuapp.com']
