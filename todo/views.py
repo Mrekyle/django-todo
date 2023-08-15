@@ -46,8 +46,8 @@ def add_item(request):
         # # Passing the items variables to the create object method. To create it on the database
         # Item.objects.create(name=name, done=done)
 
-        print(request.POST)
-        print('Done value: ', done)
+        # print(request.POST)
+        # print('Done value: ', done)
 
         #  Using the redirect method it redirects the user to the 'home'/previous page. - Remembering redirect needs importing
         # return redirect('get_todo_list')
